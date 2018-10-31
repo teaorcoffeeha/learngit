@@ -1,3 +1,8 @@
 ﻿创建文件夹 dir name
 进入 cd
 显示当前路径 pwd
+git add 文件名
+git commit -m ""
+git status
+git diff 文件名
+git diff cached
