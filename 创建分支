@@ -1,0 +1,67 @@
+创建分支dev git branch dev 
+转换到dev分支 git checkout dev
+$ git checkout -b dev
+Switched to a new branch 'dev'
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (dev)
+$ git branch
+* dev
+  master
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (dev)
+$ git add "创建分支"
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (dev)
+$ git commit -m "branch test"
+[dev 5a4dc70] branch test
+ 1 file changed, 2 insertions(+)
+ create mode 100644 "\345\210\233\345\273\272\345\210\206\346\224\257"
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (dev)
+$ cat 创建分支
+创建分支dev git branch dev
+转换到dev分支 git checkout dev
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (dev)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (master)
+$ git merge dev
+Updating b387821..5a4dc70
+Fast-forward
+ "\345\210\233\345\273\272\345\210\206\346\224\257" | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 "\345\210\233\345\273\272\345\210\206\346\224\257"
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (master)
+
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (master)
+$ git branch
+* master
+
+解决冲突 
+创建分支后，在分支中修改文件，然后回到master中修改文件，两次修改内容不一样。
+当merge时，就会出现分支冲突的现象，提示conflict。使用git status可以告诉我们冲突的文件。
+再次进去文件中会发现git使用>>>>>>>> ========== <<<<<<<<标记不同分支的内容。手动修改文件，再提交。
+Administrator@PC-20170319NIQY MINGW64 /e/Git/learngit/gitskill (master)
+$ git log --graph --pretty=oneline --abbrev-commit
+*   740f3bd (HEAD -> master) 解决冲突3
+|\
+| * 439ab6c (feature1) 解决冲突
+* | d9bb7f7 解决冲突22
+|/
+* 3f01f23 record branch pro
+* 5a4dc70 branch test
+* b387821 (origin/master, origin/HEAD) Initial commit
+
+git merge dev合并分支时，自动快速合并，这样删除分支dev后不会保存分支信息
+Fast-forward
+如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+git merge --no-ff -m "merge with no-ff" dev
+
+git push origin master
+
+修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；
+
+当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。
