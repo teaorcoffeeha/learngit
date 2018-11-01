@@ -6,3 +6,4 @@ git commit -m ""
 git status
 git diff 文件名
 git diff cached
+git stash 保存目前工作状态
